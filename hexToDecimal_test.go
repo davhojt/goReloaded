@@ -19,6 +19,8 @@ func TestHexToDecimal(t *testing.T) {
 		{"converts upper case", "1E", "30"},
 		{"converts hex without letters", "123", "291"},
 		{"handles leading zeros", "00000ABC", "2748"},
+		{"handles empty string", "", "0"},
+		{"handles empty string", "z", "0"},
 	}
 
 	for _, tt := range tests {
