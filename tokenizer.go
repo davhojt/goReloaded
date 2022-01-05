@@ -100,7 +100,6 @@ func tokenize(str string) []token {
 	return tokens
 }
 
-// TODO: TEST
 func correctArticle(article, noun string) string {
 	type sound int64
 
