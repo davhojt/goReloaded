@@ -20,13 +20,9 @@ type token struct {
 	count    int
 }
 
-func getTokenKind(r rune) tokenKind {
-	if unicode.IsSpace(r) {
-		return WhiteSpace
-	}
-
-	// TODO: Make Global
-	punctuation := map[rune]bool{
+// TODO: TEST
+func getPunctuation() map[rune]bool {
+	return map[rune]bool{
 		'.': false,
 		',': false,
 		'!': false,
@@ -34,6 +30,15 @@ func getTokenKind(r rune) tokenKind {
 		':': false,
 		';': false,
 	}
+}
+
+func getTokenKind(r rune) tokenKind {
+	if unicode.IsSpace(r) {
+		return WhiteSpace
+	}
+
+	// TODO: Make Global
+	punctuation := getPunctuation()
 
 	if _, exists := punctuation[r]; exists {
 		return Punctuation
