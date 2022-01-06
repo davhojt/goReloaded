@@ -127,6 +127,11 @@ func TestProcessString(t *testing.T) {
 			"42:",
 		},
 		{
+			"operation applied over punctuation punctuation",
+			"10: (bin)",
+			"2:",
+		},
+		{
 			"operation at end",
 			"101010 (bin).",
 			"42.",
