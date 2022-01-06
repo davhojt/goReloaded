@@ -14,13 +14,13 @@ func TestGetTokenKind(t *testing.T) {
 		{"identifies space", ' ', WhiteSpace},
 		{"identifies tab", '\t', WhiteSpace},
 		{"identifies new line", '\n', WhiteSpace},
-		{"identifies characters", 'a', Other},
-		{"identifies number", '4', Other},
-		{"identifies zero", '0', Other},
-		{"identifies non-punctuation", '-', Other},
+		{"identifies characters", 'a', Word},
+		{"identifies number", '4', Word},
+		{"identifies zero", '0', Word},
+		{"identifies non-punctuation", '-', Word},
 		{"identifies punctuation", '.', Punctuation},
 		{"identifies single quote", '\'', Quote},
-		{"handles null", 0, Other},
+		{"handles null", 0, Word},
 	}
 
 	for _, tt := range tests {

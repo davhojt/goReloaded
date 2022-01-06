@@ -68,7 +68,7 @@ func runOperations(tokens []token) []token {
 			count := t.count
 
 			for position := i - 1; position >= 0 && count > 0; position-- {
-				if tokens[position].kind == Other {
+				if tokens[position].kind == Word {
 					count--
 					tokens[position].str = function(tokens[position].str)
 				}

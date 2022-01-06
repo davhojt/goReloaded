@@ -56,35 +56,35 @@ func TestRunOperations(t *testing.T) {
 
 	characters := token{
 		"abc",
-		Other,
+		Word,
 		nil,
 		0,
 	}
 
 	charactersOne := token{
 		"abc---one---",
-		Other,
+		Word,
 		nil,
 		0,
 	}
 
 	charactersOneOne := token{
 		"abc---one------one---",
-		Other,
+		Word,
 		nil,
 		0,
 	}
 
 	charactersOneTwo := token{
 		"abc---one---***two***",
-		Other,
+		Word,
 		nil,
 		0,
 	}
 
 	charactersTwo := token{
 		"abc***two***",
-		Other,
+		Word,
 		nil,
 		0,
 	}

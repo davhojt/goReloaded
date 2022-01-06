@@ -6,7 +6,7 @@ type tokenKind int64
 
 const (
 	NoneKind tokenKind = iota
-	Other
+	Word
 	WhiteSpace
 	Punctuation
 	Quote
@@ -46,7 +46,7 @@ func getTokenKind(r rune) tokenKind {
 		return Quote
 	}
 
-	return Other
+	return Word
 }
 
 // TODO: Test
@@ -74,7 +74,7 @@ func tokenize(str string) []token {
 		}
 
 		// 1. Checks if it is an operation Operation and creates token
-		// 2. Checks other token types
+		// 2. Checks Word token types
 		// 3. Get's last token
 		if valid, count, function, snippet := getOperation(str[i:]); valid {
 			addCurrentToken()
@@ -170,7 +170,7 @@ func mergeTokens(tokens []token) string {
 		if tokens[i].kind == Punctuation {
 			buffer = tokens[i].str
 			for tokenIndex := i + 1; tokenIndex < len(tokens); tokenIndex++ {
-				if tokens[tokenIndex].kind == Other {
+				if tokens[tokenIndex].kind == Word {
 					spaceAfter = " "
 					break
 				}
@@ -178,7 +178,7 @@ func mergeTokens(tokens []token) string {
 		}
 
 		// Adds words
-		if tokens[i].kind == Other {
+		if tokens[i].kind == Word {
 			// Indefinite article check (a/an)
 			if toLowerCase(tokens[i].str) == "a" || toLowerCase(tokens[i].str) == "an" {
 				for nextToken := i + 1; nextToken < len(tokens); nextToken++ {
@@ -186,7 +186,7 @@ func mergeTokens(tokens []token) string {
 						break
 					}
 
-					if tokens[nextToken].kind == Other {
+					if tokens[nextToken].kind == Word {
 						tokens[i].str = correctArticle(tokens[i].str, tokens[nextToken].str)
 						break
 					}
@@ -199,7 +199,7 @@ func mergeTokens(tokens []token) string {
 			for nextToken := i + 1; nextToken < len(tokens); nextToken++ {
 				if tokens[nextToken].kind == WhiteSpace || tokens[nextToken].kind == Operation {
 					continue
-				} else if tokens[nextToken].kind == Other {
+				} else if tokens[nextToken].kind == Word {
 					spaceAfter = " "
 				} else {
 					break
@@ -215,7 +215,7 @@ func mergeTokens(tokens []token) string {
 					spaceAfter = " "
 				} else {
 					for tokenIndex := i - 1; tokenIndex >= 0; tokenIndex-- {
-						if tokens[tokenIndex].kind == Other {
+						if tokens[tokenIndex].kind == Word {
 							spaceBefore = " "
 							break
 						}
