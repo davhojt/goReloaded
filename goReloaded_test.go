@@ -29,6 +29,26 @@ func TestProcessString(t *testing.T) {
 			"Punctuation tests are... kinda boring, don't you think!?",
 		},
 		{
+			"handles kood audit 1",
+			"If I make you BREAKFAST IN BED (low, 3) just say thank you instead of: how (cap) did you get in my house (up, 2) ?",
+			"If I make you breakfast in bed just say thank you instead of: How did you get in MY HOUSE?",
+		},
+		{
+			"handles kood audit 2",
+			"I have to pack 101 (bin) outfits. Packed 1a (hex) just to be sure",
+			"I have to pack 5 outfits. Packed 26 just to be sure",
+		},
+		{
+			"handles kood audit 3",
+			"Don not be sad ,because sad backwards is das . And das not good",
+			"Don not be sad, because sad backwards is das. And das not good",
+		},
+		{
+			"handles kood audit 4",
+			"harold wilson (cap, 2) : ' I am a optimist ,but a optimist who carries a raincoat . '",
+			"Harold Wilson: 'I am an optimist, but an optimist who carries a raincoat.'",
+		},
+		{
 			"only spaces",
 			"  ",
 			"",

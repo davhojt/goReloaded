@@ -171,7 +171,12 @@ func mergeTokens(tokens []token) string {
 		// Adds punctuation
 		if tokens[i].kind == Punctuation {
 			buffer = tokens[i].str
-			spaceAfter = " "
+			for tokenIndex := i + 1; tokenIndex < len(tokens); tokenIndex++ {
+				if tokens[tokenIndex].kind == Other {
+					spaceAfter = " "
+					break
+				}
+			}
 		}
 
 		// Adds words
@@ -211,7 +216,15 @@ func mergeTokens(tokens []token) string {
 				if inQuoute {
 					spaceAfter = " "
 				} else {
-					spaceBefore = " "
+					for tokenIndex := i - 1; tokenIndex >= 0; tokenIndex-- {
+						if tokens[tokenIndex].kind == Other {
+							spaceBefore = " "
+							break
+						}
+						if tokens[tokenIndex].kind == Punctuation {
+							break
+						}
+					}
 				}
 				inQuoute = !inQuoute
 			}
