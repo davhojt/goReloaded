@@ -20,7 +20,6 @@ type token struct {
 	count    int
 }
 
-// TODO: TEST
 func getPunctuation() map[rune]bool {
 	return map[rune]bool{
 		'.': false,
@@ -37,7 +36,6 @@ func getTokenKind(r rune) tokenKind {
 		return WhiteSpace
 	}
 
-	// TODO: Make Global
 	punctuation := getPunctuation()
 
 	if _, exists := punctuation[r]; exists {

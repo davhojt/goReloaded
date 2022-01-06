@@ -45,9 +45,6 @@ func getOperation(str string) (valid bool, count int, function func(str string) 
 			if len(data[countIndex]) == 0 {
 				return true, 1, op.function, data[snippetIndex]
 			} else if op.multipleWords {
-				// TODO: operation must certainly handle positive cases.
-				// TODO: Handle negatives, here otr in return.
-				// TODO: Handle 12ioaiouo is probably valid for ATOI. SHould only be na int.
 				count, err := strconv.Atoi(data[countIndex])
 
 				if err == nil {
