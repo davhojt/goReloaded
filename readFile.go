@@ -4,8 +4,9 @@ import "os"
 
 // TODO: write tests
 func ReadFile(path string) string {
-	// TODO: handle error
-	// TODO: hanle if file does not exist
-	bytes, _ := os.ReadFile(path)
+	bytes, err := os.ReadFile(path)
+	if err != nil {
+		panic("Failed while reading file")
+	}
 	return string(bytes)
 }
