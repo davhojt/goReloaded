@@ -13,11 +13,15 @@ const (
 	Operation
 )
 
+type opData struct {
+	ptr   *func(str string) string
+	count int
+}
+
 type token struct {
-	str      string
-	kind     tokenKind
-	function *func(str string) string
-	count    int
+	str  string
+	kind tokenKind
+	op   opData
 }
 
 func getPunctuation() map[rune]bool {
@@ -65,7 +69,7 @@ func tokenize(str string) []token {
 
 		addToken := func(tokenStr string, kind tokenKind, function *func(str string) string, count int) {
 			if currentKind != NoneKind {
-				tokens = append(tokens, token{tokenStr, kind, function, count})
+				tokens = append(tokens, token{tokenStr, kind, opData{function, count}})
 			}
 		}
 

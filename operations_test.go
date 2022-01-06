@@ -50,78 +50,100 @@ func TestRunOperations(t *testing.T) {
 	space := token{
 		"   ",
 		WhiteSpace,
-		nil,
-		0,
+		opData{
+			nil,
+			0,
+		},
 	}
 
 	characters := token{
 		"abc",
 		Word,
-		nil,
-		0,
+		opData{
+			nil,
+			0,
+		},
 	}
 
 	charactersOne := token{
 		"abc---one---",
 		Word,
-		nil,
-		0,
+		opData{
+			nil,
+			0,
+		},
 	}
 
 	charactersOneOne := token{
 		"abc---one------one---",
 		Word,
-		nil,
-		0,
+		opData{
+			nil,
+			0,
+		},
 	}
 
 	charactersOneTwo := token{
 		"abc---one---***two***",
 		Word,
-		nil,
-		0,
+		opData{
+			nil,
+			0,
+		},
 	}
 
 	charactersTwo := token{
 		"abc***two***",
 		Word,
-		nil,
-		0,
+		opData{
+			nil,
+			0,
+		},
 	}
 
 	punctuation := token{
 		".,;",
 		Punctuation,
-		nil,
-		0,
+		opData{
+			nil,
+			0,
+		},
 	}
 
 	operationOne := token{
 		"(one)",
 		Operation,
-		&one,
-		1,
+		opData{
+			&one,
+			1,
+		},
 	}
 
 	operationOneCountThree := token{
 		"(one)",
 		Operation,
-		&one,
-		3,
+		opData{
+			&one,
+			3,
+		},
 	}
 
 	operationTwo := token{
 		"(two)",
 		Operation,
-		&two,
-		1,
+		opData{
+			&two,
+			1,
+		},
 	}
 
 	operationTwoCountFour := token{
 		"(two)",
 		Operation,
-		&two,
-		4,
+		opData{
+			&two,
+			4,
+		},
 	}
 
 	var tests = []struct {
@@ -140,12 +162,12 @@ func TestRunOperations(t *testing.T) {
 			[]token{space, space, space},
 		},
 		{
-			"only others",
+			"only words",
 			[]token{characters},
 			[]token{characters},
 		},
 		{
-			"consecutive others",
+			"consecutive words",
 			[]token{characters, characters, characters},
 			[]token{characters, characters, characters},
 		},
@@ -242,7 +264,7 @@ func TestRunOperations(t *testing.T) {
 
 			for i := range tt.want {
 				if i >= len(got) || i >= len(tt.want) ||
-					got[i].count != tt.want[i].count ||
+					got[i].op.count != tt.want[i].op.count ||
 					got[i].str != tt.want[i].str ||
 					got[i].kind != tt.want[i].kind {
 					t.Fatalf("\ngot %v\nwant %v", got, tt.want)

@@ -63,9 +63,9 @@ func runOperations(tokens []token) []token {
 
 	for i, t := range tokens {
 		if t.kind == Operation {
-			function := *t.function
+			function := *t.op.ptr
 
-			count := t.count
+			count := t.op.count
 
 			for position := i - 1; position >= 0 && count > 0; position-- {
 				if tokens[position].kind == Word {
