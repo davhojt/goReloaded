@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 func TestProcessString(t *testing.T) {
 	var tests = []struct {
@@ -140,6 +143,76 @@ func TestProcessString(t *testing.T) {
 			got := processString(tt.input)
 			if got != tt.want {
 				t.Fatalf("\ngot\n[%s]\nwant\n[%s]", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestGoReloaded(t *testing.T) {
+	var tests = []struct {
+		name   string
+		input  string
+		output string
+		want   string
+	}{
+		{
+			"expected result in test/audit_1_output for test/example_1",
+			"test/example_1",
+			"test/example_1_output",
+			"It was the best of times, it was the worst of TIMES, it was the age of wisdom, It Was The Age Of Foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of darkness, it was the spring of hope, it was the winter of despair.",
+		},
+		{
+			"expected result in test/example_2_output for test/example_2",
+			"test/example_2",
+			"test/example_2_output",
+			"Simply add 66 and 2 and you will see the result is 68.",
+		},
+		{
+			"expected result in test/example_3_output for test/example_3",
+			"test/example_3",
+			"test/example_3_output",
+			"There is no greater agony than bearing an untold story inside you.",
+		},
+		{
+			"expected result in test/example_4_output for test/example_4",
+			"test/example_4",
+			"test/example_4_output",
+			"Punctuation tests are... kinda boring, don't you think!?",
+		},
+		{
+			"expected result in test/audit_1_output for test/audit_1",
+			"test/audit_1",
+			"test/audit_1_output",
+			"If I make you breakfast in bed just say thank you instead of: How did you get in MY HOUSE?",
+		},
+		{
+			"expected result in test/audit_2_output for test/audit_2",
+			"test/audit_2",
+			"test/audit_2_output",
+			"I have to pack 5 outfits. Packed 26 just to be sure",
+		},
+		{
+			"expected result in test/audit_3_output for test/audit_3",
+			"test/audit_3",
+			"test/audit_3_output",
+			"Don not be sad, because sad backwards is das. And das not good",
+		},
+		{
+			"expected result in test/audit_4_output for test/audit_4",
+			"test/audit_4",
+			"test/audit_4_output",
+			"Harold Wilson: 'I am an optimist, but an optimist who carries a raincoat.'",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			GoReloaded(tt.input, tt.output)
+
+			got, err := os.ReadFile(tt.output)
+
+			if err != nil || string(got) != tt.want {
+				t.Fatalf("\ngot\n[%s]\nwant\n[%s]\nerr: [%s]", got, tt.want, err)
 			}
 		})
 	}
