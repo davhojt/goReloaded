@@ -174,17 +174,19 @@ func mergeTokens(tokens []token) string {
 			spaceAfter = " "
 		}
 
+		// Adds words
 		if tokens[i].kind == Other {
-			// TODO: This runs every time, even if the current word is not an article.
-			// Indefinite article check
-			for nextToken := i + 1; nextToken < len(tokens); nextToken++ {
-				if tokens[nextToken].kind == Punctuation {
-					break
-				}
+			// Indefinite article check (a/an)
+			if toLowerCase(tokens[i].str) == "a" || toLowerCase(tokens[i].str) == "an" {
+				for nextToken := i + 1; nextToken < len(tokens); nextToken++ {
+					if tokens[nextToken].kind == Punctuation {
+						break
+					}
 
-				if tokens[nextToken].kind == Other {
-					tokens[i].str = correctArticle(tokens[i].str, tokens[nextToken].str)
-					break
+					if tokens[nextToken].kind == Other {
+						tokens[i].str = correctArticle(tokens[i].str, tokens[nextToken].str)
+						break
+					}
 				}
 			}
 
