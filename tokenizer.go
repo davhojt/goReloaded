@@ -5,7 +5,7 @@ import "unicode"
 type tokenKind int64
 
 const (
-	NoneKind tokenKind = iota
+	NoKind tokenKind = iota
 	Word
 	WhiteSpace
 	Punctuation
@@ -57,7 +57,7 @@ func getTokenKind(r rune) tokenKind {
 func tokenize(str string) []token {
 	var tokens []token
 
-	currentKind := NoneKind
+	currentKind := NoKind
 	start := 0
 	// end := 0
 
@@ -68,7 +68,7 @@ func tokenize(str string) []token {
 		}
 
 		addToken := func(tokenStr string, kind tokenKind, function *func(str string) string, count int) {
-			if currentKind != NoneKind {
+			if currentKind != NoKind {
 				tokens = append(tokens, token{tokenStr, kind, opData{function, count}})
 			}
 		}
@@ -85,7 +85,7 @@ func tokenize(str string) []token {
 			addToken(snippet, Operation, &function, count)
 
 			start = i + len(snippet)
-			currentKind = NoneKind
+			currentKind = NoKind
 		} else {
 			if runeKind := getTokenKind(r); runeKind != currentKind {
 				addCurrentToken()
