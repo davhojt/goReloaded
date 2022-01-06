@@ -33,7 +33,7 @@ func getOperation(str string) (valid bool, count int, function func(str string) 
 		puncIndex++
 	}
 
-	pattern := fmt.Sprintf(`^(\({1}([a-z]{1,3})(?:, ([0-9]*)){0,1}\){1})(?:$|\s|[%s]{1,})`, string(punctuation))
+	pattern := fmt.Sprintf(`^(\({1}([a-z]{1,3})(?:, ([0-9]{1,})){0,1}\){1})(?:$|\s|[%s]{1,})`, string(punctuation))
 	re := regexp.MustCompile(pattern)
 
 	// Extract data from operation

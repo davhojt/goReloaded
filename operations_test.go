@@ -21,6 +21,7 @@ func TestGetOperation(t *testing.T) {
 		{"ignores brackets at the start of words", "(cap)ital city", false, 0, ""},
 		{"ignores brackets at the end of words", "look(up)", false, 0, ""},
 		{"ignores operations with invalid count", "(up, f)", false, 0, ""},
+		{"ignores operations with invalid count", "(up, )", false, 0, ""},
 		{"ignores operations with invalid white space delimitor count", "(cap,\n3)", false, 0, ""},
 		{"ignores operations with no white space delimitor count", "(low,5)", false, 0, ""},
 		{"ignores operations with invalid delimitor character", "(up- 7)", false, 0, ""},
