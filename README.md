@@ -50,7 +50,6 @@ for i := 0; i < token.op.count; i++
 for i := 0; i < getOperationCount(token); i++
 ```
 
-## About
 Each word is broken down into tokens:
 ![](assets/img/tokenTypes.png)
 
