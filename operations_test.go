@@ -13,6 +13,7 @@ func TestGetOperation(t *testing.T) {
 		{"identifies operation without count", "(cap)", true, 1, "(cap)"},
 		{"identifies operation with count", "(up, 45)", true, 45, "(up, 45)"},
 		{"identifies operation before punctuation", "(hex)...", true, 1, "(hex)"},
+		{"identifies operation before single punctuation", "(hex),", true, 1, "(hex)"},
 		{"identifies operation before white space", "(bin)\n \t", true, 1, "(bin)"},
 		{"ignores invalid operations without count", "(bar)", false, 0, ""},
 		{"ignores invalid operations with count", "(foo 42)", false, 0, ""},

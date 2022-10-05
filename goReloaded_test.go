@@ -99,9 +99,14 @@ func TestProcessString(t *testing.T) {
 			"101010",
 		},
 		{
+			"operation before punctuation",
+			"101010 (bin):",
+			"42:",
+		},
+		{
 			"operation at end",
-			"101010 (bin)",
-			"42",
+			"101010 (bin).",
+			"42.",
 		},
 		{
 			"invalid operation",
