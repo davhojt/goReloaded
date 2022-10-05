@@ -58,3 +58,24 @@ func getOperation(word string) (valid bool, count int, function func(str string)
 	// Word is not op code
 	return false, 0, nil, ""
 }
+
+// TODO: Probably shouldn't modify the input (look at pointers).
+func runOperations(tokens []token) []token {
+
+	for i, t := range tokens {
+		if t.kind == Operation {
+			function := *t.function
+
+			count := t.count
+
+			for position := i - 1; position >= 0 && count > 0; position-- {
+				if tokens[position].kind == Other {
+					count--
+					tokens[position].str = function(tokens[position].str)
+				}
+			}
+		}
+	}
+
+	return tokens
+}
